@@ -9,12 +9,12 @@ For install the vsftp(acronym of 'Very Stable FTP') follow this
 
 confirm if there is vsftpd or not
 
-  1. rpm -qa vsftpd*
+	1. rpm -qa vsftpd*
   
 if there is no vsftpd,
 
-  1.  yum install vsftpd -y
-  2.  rpm -qa vsftpd*
+	1. yum install vsftpd -y
+  2. rpm -qa vsftpd*
   
 then you will get the message below
   
