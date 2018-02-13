@@ -11,7 +11,7 @@ import datetime
 
 # this is for permission to the FTP server
 from ftplib import FTP
-ftp = FTP("ftp://116.38.151.198")
+ftp = FTP("116.38.151.198")
 ftp.login('pi01', 'capprules')
 
 # this is the body of the function
