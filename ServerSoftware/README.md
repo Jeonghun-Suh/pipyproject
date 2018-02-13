@@ -1,5 +1,5 @@
 
-# Software for Linux Server
+# Software for Linux CentOS 7 Server
 
 ## FTP server setup
 This program is for CentOS 7 Linux server (I think the other UNIX based OSs will be OK.) .
@@ -136,3 +136,58 @@ with those three commands, you can confirm the installation and its version.
 
 ### Apache configuration
 
+you can open the configuration file with vi editor
+
+	vi /etc/httpd/conf/httpd.conf
+
+and revise it as
+
+	...
+	User nobody
+	Group nobody
+	...
+	ServerName your.domain.name:80
+	...
+	
+or
+
+	...
+	User nobody
+	Group nobody
+	...
+	ServerName 127.0.0.0:80 (or your ip4 address)
+	...
+
+if you don't know about your ip address,
+
+	ifconfig
+	
+this command will show it.
+
+then let's open the firewall port
+
+	vi /etc/sysconfig/iptables
+	
+and add below line just after the "-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT"
+
+	-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+
+the sequence of the lines are very important in this part
+
+	service iptables restart
+	iptables -nL
+	
+and start apache server
+
+	systemctl start httpd
+	systemctl enable httpd
+	
+or
+
+	service httpd start
+	systemctl enable httpd
+
+then, you can confirm it
+
+	ps -ef |grep httpd
+	
