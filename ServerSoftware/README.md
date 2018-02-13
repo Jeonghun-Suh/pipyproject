@@ -191,3 +191,43 @@ then, you can confirm it
 
 	ps -ef |grep httpd
 	
+### PHP configuration
+
+	vi /etc/httpd/conf/httpd.conf
+	
+revise it as
+	
+	...
+	164 <IfModule dir_module>
+	165     DirectoryIndex index.html index.htm index.php
+	166 </IfModule>
+	...
+	274     AddType application/x-httpd-php .php .html .htm .inc
+	275     AddType application/x-httpd-php-source .phps
+
+and if need, revise this
+
+	vi /etc/php.ini
+
+Now, you can go to this dir.
+
+	cd /var/www/html/
+
+any .php, .html or .htm files on this directory will be shown in the your web page
+with
+
+	service httpd restart
+
+### MariaDB configuration
+
+initial configuration
+
+	mysql_secure_installation
+
+the other configuration is on
+	
+	vi /etc/my.cnf
+	
+now you can run the mariadb
+
+	systemctl start mariadb
