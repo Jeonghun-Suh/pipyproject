@@ -10,12 +10,12 @@ For install the vsftp(acronym of 'Very Stable FTP') follow this
 
 confirm if there is vsftpd or not
 
-	1. rpm -qa vsftpd*
+	rpm -qa vsftpd*
   
 if there is no vsftpd,
 
-	1. yum install vsftpd -y	
-	2. rpm -qa vsftpd*
+	yum install vsftpd -y	
+	rpm -qa vsftpd*
   
 then you will get the message below
   
@@ -24,7 +24,7 @@ then you will get the message below
 you can start the vsftpd service now, but it needs some configurations.
 confirm with the command below
   
-	1. service vsftpd status
+	service vsftpd status
 
 then you will get
 
@@ -32,38 +32,38 @@ then you will get
   
 Let's start configuration.
   
-	1. vi /etc/vsftpd/vsftpd.conf
+	vi /etc/vsftpd/vsftpd.conf
 
 'i' is the insert command and 'ctrl + c', ':wq' means 'quit with save the modified things'
 
 set the (you should find each conpoments and revise them)
 
-	1.	anonymous_enable = NO
-	2.	local_enable = YES
-	3.	write_enable=YES
-	4.	local_umask=022
-	5.	dirmessage_enable=YES
-	6.	xferlog_enable=YES
-	7.	connect_from_port_20=YES
-	8.	xferlog_file=/var/log/xferlog
-	9.	xferlog_std_format=YES
-	10.	chroot_local_user=YES
-	11.	listen=YES
-	12.
-	13.	pam_service_name=vsftpd
-	14.	userlist_enable=YES
-	15.	tcp_wrappers=YES
+	anonymous_enable = NO
+	local_enable = YES
+	write_enable=YES
+	local_umask=022
+	dirmessage_enable=YES
+	xferlog_enable=YES
+	connect_from_port_20=YES
+	xferlog_file=/var/log/xferlog
+	xferlog_std_format=YES
+	chroot_local_user=YES
+	listen=YES
+	
+	pam_service_name=vsftpd
+	userlist_enable=YES
+	tcp_wrappers=YES
 
 now we can run the vsftpd
 
-	1. service vsftpd start
-	2. netstat -anp | grep vsftpd
-	3. chkconfig vsftpd on
-	4. chkconfig --list | grep vsftpd
+	service vsftpd start
+	netstat -anp | grep vsftpd
+	chkconfig vsftpd on
+	chkconfig --list | grep vsftpd
 
 additional configuration settings
 
-	1. vi /etc/sysconfig/iptables-config
+	vi /etc/sysconfig/iptables-config
 
 then revise it as
 
@@ -71,7 +71,68 @@ then revise it as
 
 and restart the iptables service with
 
-	1. service iptables restart
-	2. service vsftpd restart
+	service iptables restart
+	service vsftpd restart
 
 ## APM(apache, PHP, Mysql) setup
+
+### the packages for the install
+confirm the packages with
+
+	rpm -qa libjpeg* libpng* freetype* gd-* gcc gcc-c++ gdbm-devel libtermcap-devel
+
+and setup them(if you don't have them)
+
+	yum install libjpeg* libpng* freetype* gd-* gcc gcc-c++ gdbm-devel libtermcap-devel
+	
+### Install the Apache
+	
+	yum install httpd
+	
+### Install the MariaDB
+At first, you should make the yum repository
+	
+	vi /etc/yum.repos.d/MariaDB.repo
+	
+and paste below
+
+	# MariaDB 10.1 CentOS repository list 
+	# http://downloads.mariadb.org/mariadb/repositories/
+	[mariadb]
+	name = MariaDB
+	baseurl = http://yum.mariadb.org/10.2/centos7-amd64
+	gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+	gpgcheck=1
+
+and install it
+
+	yum install MariaDB-server MariaDB-client
+	
+### Install the PHP7(latest ver. in Feb 13, 2018)
+
+At First, you should make an yum repo
+
+	rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+	
+and you can install it
+
+	yum install php70w
+
+(this is for install PHP7)
+
+and you can also install PHP7 packages
+
+	yum install php70w-mysql php70w-pdo php70w-pgsql php70w-odbc php70w-mbstring php70w-mcrypt php70w-gd
+	yum install php70w-pear php70w-pdo_dblib php70w-pecl-imagick php70w-pecl-imagick-devel php70w-xml php70w-xmlrpc
+
+### Confirm the installation
+
+	httpd -v
+	php -v
+	mysql -V
+
+with those three commands, you can confirm the installation and its version.
+
+### Apache configuration
+
