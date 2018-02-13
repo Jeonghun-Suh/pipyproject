@@ -1,5 +1,10 @@
-
 # Software for Linux CentOS 7 Server
+
+Author: Jeonghun Suh(Dep. of Physics, KAIST, Email: chemist1104@kaist.ac.kr)
+
+Date: Feb 14, 2018
+
+Brief: This is for CentOS 7 Linux server with Raspberry Pi 3 clients
 
 ## FTP server setup
 This program is for CentOS 7 Linux server (I think the other UNIX based OSs will be OK.) .
