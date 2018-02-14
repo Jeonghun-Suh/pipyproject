@@ -24,31 +24,31 @@ gpio.setup(echo,gpio.IN)
 def dist():
     #gpio cleanup and launching the first pulse wave
 	gpio.output(trig,False)
-    time.sleep(0.1)
-    gpio.output(trig,True)
-    time.sleep(0.0001)
+	time.sleep(0.1)
+	gpio.output(trig,True)
+	time.sleep(0.0001)
     
 	now = time.clock()
     
 	pulse_start = now
-    pulse_end = now
+	pulse_end = now
     
 	while gpio.input(echo) == 0:
-        pulse_start = time.clock()
+		pulse_start = time.clock()
 
 		#If it takes too long time, program would not wait for it
-        if pulse_start - now > 1:
-            break
+		if pulse_start - now > 1:
+			break
 
-    while gpio.input(echo) == 1:
-        pulse_end = time.clock()
+	while gpio.input(echo) == 1:
+		pulse_end = time.clock()
 
-    dur = pulse_end - pulse_start
-    dist = dur*17150
-    if dist < 0:
-        dist = 3000
+	dur = pulse_end - pulse_start
+	dist = dur*17150
+	if dist < 0:
+		dist = 3000
 
-    return dist
+	return dist
 
 # this function exports the input value of 'echo'
 # (trig has only output value)

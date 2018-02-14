@@ -19,5 +19,5 @@ def read(i):
 	return mcp.read_adc(i)
 
 def read_one_line():
-	line = str(readmcp.read(0))+'|'+str(readmcp.read(1))+'|'+str(readmcp.read(2))+'|'+str(readmcp.read(3))+'|'+str(readmcp.read(4))+'|'+str(readmcp.read(5))+'|'+str(readmcp.read(6))+'|'+str(readmcp.read(7))
+	line = str(read(0))+'|'+str(read(1))+'|'+str(read(2))+'|'+str(read(3))+'|'+str(read(4))+'|'+str(read(5))+'|'+str(read(6))+'|'+str(read(7))
 	return line
