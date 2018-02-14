@@ -10,6 +10,7 @@ import readmcp
 import time
 import datetime
 
+#you should modify this tag for each rpi3
 tag = '00' 
 
 def get_timestamp():
