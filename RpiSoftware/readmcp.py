@@ -17,3 +17,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 
 def read(i):
 	return mcp.read_adc(i)
+
+def read_one_line():
+	line = str(readmcp.read(0))+'|'+str(readmcp.read(1))+'|'+str(readmcp.read(2))+'|'+str(readmcp.read(3))+'|'+str(readmcp.read(4))+'|'+str(readmcp.read(5))+'|'+str(readmcp.read(6))+'|'+str(readmcp.read(7))
+	return line
